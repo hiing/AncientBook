@@ -32,3 +32,16 @@ def test_write_pdf_refuses_to_overwrite_without_flag(tmp_path: Path):
         assert "already exists" in str(exc)
     else:
         raise AssertionError("Expected PdfGenerationError")
+
+
+def test_write_pdf_accepts_named_template(tmp_path: Path):
+    output = tmp_path / "book-aged.pdf"
+    settings = LayoutSettings(page_width=300, page_height=400, margin=40, columns=4, rows=6, font_size=14)
+    tokens = parse_markup("天地玄黃")
+    placements = layout_tokens(tokens, settings)
+
+    write_pdf(output, placements, settings, font_path=None, title="Test Book", template_key="aged")
+
+    reader = PdfReader(str(output))
+    assert len(reader.pages) == 1
+    assert output.stat().st_size > 1000

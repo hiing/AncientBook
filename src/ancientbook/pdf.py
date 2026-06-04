@@ -9,7 +9,8 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 
 from ancientbook.model import GlyphPlacement, LayoutSettings
-from ancientbook.template import create_simple_background
+from ancientbook.presets import DEFAULT_TEMPLATE
+from ancientbook.template import create_background
 
 
 class PdfGenerationError(RuntimeError):
@@ -28,8 +29,8 @@ def _register_font(font_path: Path | None) -> str:
     return font_name
 
 
-def _background_reader(settings: LayoutSettings) -> ImageReader:
-    image = create_simple_background(settings)
+def _background_reader(settings: LayoutSettings, template_key: str) -> ImageReader:
+    image = create_background(template_key, settings)
     buffer = BytesIO()
     image.save(buffer, format="PNG")
     buffer.seek(0)
@@ -43,6 +44,7 @@ def write_pdf(
     font_path: Path | None,
     title: str,
     overwrite: bool = False,
+    template_key: str = DEFAULT_TEMPLATE,
 ) -> None:
     output = Path(output_path)
     if output.exists() and not overwrite:
@@ -56,7 +58,7 @@ def write_pdf(
     pdf.setAuthor("")
     pdf.setCreator("AncientBook")
 
-    background = _background_reader(settings)
+    background = _background_reader(settings, template_key)
     for page_index in range(page_count):
         pdf.drawImage(background, 0, 0, width=settings.page_width, height=settings.page_height)
         for placement in placements:
