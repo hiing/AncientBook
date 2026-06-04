@@ -12,6 +12,7 @@ dependencies = [
   "Pillow>=10.4",
   "reportlab>=4.2",
   "pypdf>=4.2",
+  "PySide6>=6.8",
 ]
 
 [project.optional-dependencies]
@@ -21,6 +22,7 @@ dev = [
 
 [project.scripts]
 ancientbook = "ancientbook.cli:main"
+ancientbook-desktop = "ancientbook.desktop.app:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
