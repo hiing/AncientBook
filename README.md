@@ -2,7 +2,7 @@
 
 AncientBook is a clean-room Python desktop-tool project for generating Chinese ancient-book-style vertical PDFs from plain text.
 
-Current status: core PDF pipeline planning and implementation.
+Current status: core PDF pipeline, desktop UI, and Windows folder packaging are implemented.
 
 Safety principles:
 
@@ -37,7 +37,7 @@ The first core slice can:
 - Draw a simple ancient-book-style page background.
 - Generate a PDF locally.
 
-The desktop interface, user settings, richer templates, and Windows packaging are planned next.
+The desktop interface, user settings, and Windows folder packaging are implemented. Richer templates can be added in later slices.
 
 ## Desktop Development Run
 
@@ -59,7 +59,7 @@ The first desktop slice can:
 - Generate a PDF through the tested local core pipeline.
 - Show success and error messages in the app.
 
-Packaging as a Windows executable is planned next.
+Windows folder packaging is implemented with PyInstaller.
 
 ## Font And License Notes
 
@@ -88,9 +88,22 @@ The generated `dist/` folder is a build artifact and is not committed to git.
 After receiving a built `dist\AncientBook` folder:
 
 1. Open `AncientBook.exe`.
-2. Choose one or more `.txt` files.
-3. Choose where to save the PDF.
+2. Choose one or more `.txt` files. For a first check, use `examples\sample.txt`.
+3. Choose where to save the PDF, for example `output\sample-from-desktop.pdf`.
 4. Choose a local font file if Chinese characters do not render correctly.
 5. Click `Generate PDF`.
 
 The app works locally and does not upload your text.
+
+For a more explicit first-run checklist, see `docs/release-checklists/non-programmer-acceptance.md`.
+
+## Quick Acceptance Check
+
+Use this check after a Windows build:
+
+```powershell
+Test-Path dist\AncientBook\AncientBook.exe
+python -m ancientbook.cli examples\sample.txt --output output\sample-acceptance.pdf --overwrite
+```
+
+Then open `output\sample-acceptance.pdf` and confirm the text is vertical with an ancient-book-style page background.

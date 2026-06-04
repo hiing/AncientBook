@@ -31,3 +31,20 @@ def test_third_party_notices_cover_packaged_dependencies():
     for name in ["PySide6", "Pillow", "ReportLab", "pypdf", "PyInstaller"]:
         assert name in text
     assert "Fonts are not bundled" in text
+
+
+def test_non_programmer_acceptance_docs_are_discoverable():
+    guide = Path("docs/release-checklists/non-programmer-acceptance.md")
+    readme = Path("README.md").read_text(encoding="utf-8")
+
+    assert guide.exists()
+    guide_text = guide.read_text(encoding="utf-8")
+    for phrase in [
+        "dist\\AncientBook\\AncientBook.exe",
+        "examples\\sample.txt",
+        "output\\sample-from-desktop.pdf",
+        "does not upload text",
+        "No font files are bundled",
+    ]:
+        assert phrase in guide_text
+    assert "docs/release-checklists/non-programmer-acceptance.md" in readme
