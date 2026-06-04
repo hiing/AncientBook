@@ -38,3 +38,13 @@ The first core slice can:
 - Generate a PDF locally.
 
 The desktop interface, user settings, richer templates, and Windows packaging are planned next.
+
+## Desktop Development Run
+
+Start the desktop UI:
+
+```powershell
+ancientbook-desktop
+```
+
+The desktop UI uses the same local PDF pipeline as the CLI. User text stays on the local machine.
