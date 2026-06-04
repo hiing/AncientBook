@@ -82,3 +82,15 @@ dist\AncientBook\AncientBook.exe
 ```
 
 The generated `dist/` folder is a build artifact and is not committed to git.
+
+## Non-Programmer Workflow
+
+After receiving a built `dist\AncientBook` folder:
+
+1. Open `AncientBook.exe`.
+2. Choose one or more `.txt` files.
+3. Choose where to save the PDF.
+4. Choose a local font file if Chinese characters do not render correctly.
+5. Click `Generate PDF`.
+
+The app works locally and does not upload your text.
