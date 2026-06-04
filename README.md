@@ -66,3 +66,19 @@ Packaging as a Windows executable is planned next.
 AncientBook does not bundle commercial or unknown-license fonts. Choose a local font file that you have the right to use.
 
 Third-party dependency notes are in `docs/licenses/THIRD_PARTY_NOTICES.md`.
+
+## Build Windows Desktop App
+
+Build the desktop app:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/build_windows.ps1
+```
+
+After a successful build, open:
+
+```text
+dist\AncientBook\AncientBook.exe
+```
+
+The generated `dist/` folder is a build artifact and is not committed to git.

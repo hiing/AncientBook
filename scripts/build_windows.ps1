@@ -24,7 +24,7 @@ python -m PyInstaller `
     --distpath dist `
     --workpath build `
     --specpath build `
-    -m ancientbook.desktop.app
+    packaging/windows_desktop.py
 
 $ExePath = Join-Path $ProjectRoot "dist\AncientBook\AncientBook.exe"
 if (-not (Test-Path $ExePath)) {

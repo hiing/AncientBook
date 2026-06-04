@@ -3,12 +3,18 @@ from pathlib import Path
 
 def test_windows_build_script_exists_and_targets_desktop_app():
     script = Path("scripts/build_windows.ps1")
+    entrypoint = Path("packaging/windows_desktop.py")
 
     assert script.exists()
+    assert entrypoint.exists()
     text = script.read_text(encoding="utf-8")
     assert "PyInstaller" in text
-    assert "ancientbook.desktop.app" in text
+    assert "-m ancientbook.desktop.app" not in text
+    assert "packaging/windows_desktop.py" in text
     assert "--name AncientBook" in text
+
+    entrypoint_text = entrypoint.read_text(encoding="utf-8")
+    assert "ancientbook.desktop.app" in entrypoint_text
 
 
 def test_pyinstaller_is_dev_dependency():
