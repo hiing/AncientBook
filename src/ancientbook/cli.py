@@ -3,11 +3,12 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from ancientbook.layout import layout_tokens
-from ancientbook.markup import parse_markup
-from ancientbook.model import LayoutSettings
-from ancientbook.pdf import PdfGenerationError, write_pdf
-from ancientbook.text_reader import TextReadError, read_text_files
+from ancientbook.app_service import FriendlyGenerationError, GenerateRequest, generate_pdf_from_request
+from ancientbook.presets import COLUMN_DENSITY_CHOICES, FONT_SIZE_CHOICES, PAPER_SIZE_CHOICES, TEMPLATE_CHOICES
+
+
+def _choice_keys(choices):
+    return [choice.key for choice in choices]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -17,6 +18,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--font", default=None, help="Optional local .ttf or .otf font path")
     parser.add_argument("--title", default="AncientBook", help="PDF title")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite output PDF if it exists")
+    parser.add_argument("--template", choices=_choice_keys(TEMPLATE_CHOICES), default="simple", help="Background template")
+    parser.add_argument("--paper-size", choices=_choice_keys(PAPER_SIZE_CHOICES), default="a4", help="Paper size")
+    parser.add_argument("--font-size", choices=_choice_keys(FONT_SIZE_CHOICES), default="medium", help="Font size preset")
+    parser.add_argument("--columns", choices=_choice_keys(COLUMN_DENSITY_CHOICES), default="standard", help="Column density")
     return parser
 
 
@@ -25,13 +30,20 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        text = read_text_files([Path(path) for path in args.text_files])
-        tokens = parse_markup(text)
-        settings = LayoutSettings()
-        placements = layout_tokens(tokens, settings)
-        font_path = Path(args.font) if args.font else None
-        write_pdf(Path(args.output), placements, settings, font_path, args.title, overwrite=args.overwrite)
-    except (TextReadError, PdfGenerationError) as exc:
+        generate_pdf_from_request(
+            GenerateRequest(
+                text_files=[Path(path) for path in args.text_files],
+                output_path=Path(args.output),
+                font_path=Path(args.font) if args.font else None,
+                title=args.title,
+                overwrite=args.overwrite,
+                template_key=args.template,
+                paper_size=args.paper_size,
+                font_size=args.font_size,
+                columns=args.columns,
+            )
+        )
+    except FriendlyGenerationError as exc:
         parser.exit(2, f"AncientBook error: {exc}\n")
     return 0
 
