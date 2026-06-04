@@ -60,3 +60,9 @@ The first desktop slice can:
 - Show success and error messages in the app.
 
 Packaging as a Windows executable is planned next.
+
+## Font And License Notes
+
+AncientBook does not bundle commercial or unknown-license fonts. Choose a local font file that you have the right to use.
+
+Third-party dependency notes are in `docs/licenses/THIRD_PARTY_NOTICES.md`.

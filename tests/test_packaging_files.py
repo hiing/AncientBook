@@ -15,3 +15,13 @@ def test_pyinstaller_is_dev_dependency():
     pyproject = Path("pyproject.toml").read_text(encoding="utf-8")
 
     assert '"pyinstaller>=6.10"' in pyproject
+
+
+def test_third_party_notices_cover_packaged_dependencies():
+    notice = Path("docs/licenses/THIRD_PARTY_NOTICES.md")
+
+    assert notice.exists()
+    text = notice.read_text(encoding="utf-8")
+    for name in ["PySide6", "Pillow", "ReportLab", "pypdf", "PyInstaller"]:
+        assert name in text
+    assert "Fonts are not bundled" in text
