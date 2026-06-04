@@ -48,3 +48,15 @@ ancientbook-desktop
 ```
 
 The desktop UI uses the same local PDF pipeline as the CLI. User text stays on the local machine.
+
+## Implemented Desktop Slice
+
+The first desktop slice can:
+
+- Select text files.
+- Select an output PDF path.
+- Optionally select a local font file.
+- Generate a PDF through the tested local core pipeline.
+- Show success and error messages in the app.
+
+Packaging as a Windows executable is planned next.
