@@ -8,7 +8,9 @@ This check is for a person who receives a built `dist\AncientBook` folder and do
 2. Click Browse beside Text files and choose `examples\sample.txt`.
 3. Click Browse beside Output PDF and choose `output\sample-from-desktop.pdf`.
 4. Leave Font file empty for the first run, or choose a local `.ttf` or `.otf` font you have the right to use.
-5. Click Generate PDF.
+5. Choose a template, paper size, font size, and column density.
+6. If Font file is empty, confirm the warning dialog.
+7. Click Generate PDF.
 
 ## Expected Result
 
@@ -18,3 +20,10 @@ This check is for a person who receives a built `dist\AncientBook` folder and do
 - The page has an ancient-book-style background.
 - The app does not upload text.
 - No font files are bundled with the app by default.
+
+## Manual Coverage
+
+- [ ] Choose each template at least once.
+- [ ] Generate one A4 Medium Standard PDF.
+- [ ] Generate one A5 Large Fewer PDF.
+- [ ] Confirm the app warns when no font is selected.

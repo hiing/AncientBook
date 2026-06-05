@@ -25,6 +25,12 @@ Generate a sample PDF:
 ancientbook examples/sample.txt --output output/sample.pdf --overwrite
 ```
 
+Generate an A5 sample with a different layout preset:
+
+```powershell
+ancientbook examples/sample.txt --output output/sample-a5.pdf --paper-size a5 --font-size large --columns fewer --template aged --overwrite
+```
+
 Use `--font C:\Path\To\YourFont.ttf` to render Chinese characters with a local font. Fonts are not bundled by default because font redistribution rights vary.
 
 ## Implemented Core Slice
@@ -56,6 +62,7 @@ The first desktop slice can:
 - Select text files.
 - Select an output PDF path.
 - Optionally select a local font file.
+- Choose a template, paper size, font size, and column density.
 - Generate a PDF through the tested local core pipeline.
 - Show success and error messages in the app.
 
@@ -91,7 +98,9 @@ After receiving a built `dist\AncientBook` folder:
 2. Choose one or more `.txt` files. For a first check, use `examples\sample.txt`.
 3. Choose where to save the PDF, for example `output\sample-from-desktop.pdf`.
 4. Choose a local font file if Chinese characters do not render correctly.
-5. Click `Generate PDF`.
+5. Choose a template, paper size, font size, and column density.
+6. If you leave the font empty, confirm the warning dialog before continuing.
+7. Click `Generate PDF`.
 
 The app works locally and does not upload your text.
 
