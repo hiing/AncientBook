@@ -9,6 +9,12 @@ AncientBook v0.1.0 是第一个公开 Windows 桌面版发布包。
 
 Windows PowerShell 校验方式：
 
+当前发布包 SHA-256：
+
+```text
+7f3dceb9f22889e02a287c2a762ca669391bdd57534eb9a29213eb7b342a5cb9
+```
+
 ```powershell
 Get-FileHash .\AncientBook-Windows.zip -Algorithm SHA256
 Get-Content .\AncientBook-Windows.zip.sha256
