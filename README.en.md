@@ -6,6 +6,24 @@ AncientBook is a clean-room Python desktop-tool project for generating Chinese a
 
 Current status: core PDF pipeline, desktop UI, and Windows folder packaging are implemented.
 
+![AncientBook desktop UI](docs/images/ancientbook-ui-shadow.png)
+
+## Highlights
+
+- Windows-focused desktop app packaged as a downloadable zip.
+- Supports common document inputs beyond plain text.
+- Uses an output folder workflow and generates safe PDF filenames automatically.
+- Produces vertical Chinese PDFs with ancient-book-style paper, frames, texture, and preview.
+- Uses installed system Chinese fonts, with optional user-selected font files.
+- Processes documents locally and does not upload user content.
+- Publishes a SHA-256 checksum for release package verification.
+
+## Good Fit
+
+- Turning articles, reading notes, and Markdown drafts into ancient-book-style PDFs.
+- Preparing visually distinctive materials for posts, courses, or presentations.
+- Exploring a Windows workflow for Chinese vertical-layout PDF generation.
+
 Safety principles:
 
 - User text stays local.
