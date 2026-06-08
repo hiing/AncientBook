@@ -39,6 +39,7 @@ Get-ChildItem -LiteralPath $DistDir -Force | ForEach-Object {
 }
 
 Copy-Item -Path (Join-Path $ProjectRoot "README.md") -Destination (Join-Path $PackageDir "README-project.md") -Force
+Copy-Item -Path (Join-Path $ProjectRoot "LICENSE") -Destination (Join-Path $PackageDir "LICENSE") -Force
 Copy-Item -Path $ReleaseReadme -Destination (Join-Path $PackageDir "README-FIRST.txt") -Force
 Copy-Item -Path (Join-Path $ProjectRoot "examples\sample.txt") -Destination (Join-Path $PackageDir "examples\sample.txt") -Force
 Copy-Item -Path (Join-Path $ProjectRoot "docs\licenses\THIRD_PARTY_NOTICES.md") -Destination (Join-Path $PackageDir "licenses\THIRD_PARTY_NOTICES.md") -Force

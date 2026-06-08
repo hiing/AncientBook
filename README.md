@@ -132,7 +132,7 @@ The zip is created at:
 release\AncientBook-Windows.zip
 ```
 
-The release zip contains `AncientBook.exe`, its runtime files, a quick-start `README-FIRST.txt`, the sample file, and third-party license notes.
+The release zip contains `AncientBook.exe`, its runtime files, a quick-start `README-FIRST.txt`, the MIT `LICENSE`, the sample file, and third-party license notes.
 
 ## Non-Programmer Workflow
 
