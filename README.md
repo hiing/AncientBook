@@ -1,168 +1,158 @@
 # AncientBook
 
-AncientBook is a clean-room Python desktop-tool project for generating Chinese ancient-book-style vertical PDFs from plain text.
+[English README](README.en.md)
 
-Current status: core PDF pipeline, desktop UI, and Windows folder packaging are implemented.
+AncientBook 是一个干净重构的 Python 桌面工具，用来把常见文档转换成古籍风格的中文竖排 PDF。
 
-Safety principles:
+当前状态：核心 PDF 生成流程、桌面界面、Windows 打包脚本和 GitHub Release 发布包都已经完成。
 
-- User text stays local.
-- User text is treated as data, never as code.
-- Fonts come from installed system fonts or user-selected files; AncientBook does not bundle commercial or unknown-license fonts.
-- The project does not copy vRain source code.
+## 安全原则
 
-## Development First Run
+- 用户文档只在本机处理。
+- 用户文字只作为数据读取，不作为代码执行。
+- 字体来自 Windows 已安装字体，或用户自己选择且有权使用的本地字体文件。
+- AncientBook 不内置商业字体或来源不明的字体文件。
+- 项目不复制 vRain 源码，属于 clean-room 重构。
 
-Install the project in editable mode:
+## 直接下载
+
+普通用户可以从 GitHub Release 下载 Windows 版：
+
+[下载 AncientBook-Windows.zip](https://github.com/hiing/AncientBook/releases)
+
+下载后解压，打开 `AncientBook-Windows` 文件夹，双击 `AncientBook.exe` 即可运行。
+
+## 软件能做什么
+
+- 选择一个或多个文档。
+- 选择 PDF 输出文件夹。
+- 从系统已安装中文字体中选择字体，也可以手动选择自己的 `.ttf` 或 `.otf` 字体文件。
+- 选择古籍页面模板、纸张大小、字号和栏数密度。
+- 在右侧预览古籍页面风格。
+- 生成本地 PDF，不上传用户文字。
+
+内置页面模板：
+
+- `素雅书页`
+- `朱栏格页`
+- `旧藏纸页`
+
+## 支持的输入格式
+
+- `.txt`, `.text`
+- `.md`, `.markdown`
+- `.docx`
+- 可复制文字的 `.pdf`
+- `.rtf`
+- `.html`, `.htm`
+- `.odt`
+
+旧版 `.doc` 文件会被识别，但当前版本会提示用户先另存为 `.docx`。扫描版 PDF 需要 OCR，本版本暂不自动转换。
+
+## 普通用户使用步骤
+
+1. 打开 `AncientBook.exe`。
+2. 点击 `文档` 旁边的 `选择`，选择要转换的文档。第一次测试可以用 `examples\sample.txt`。
+3. 点击 `输出文件夹` 旁边的 `选择`，选择 PDF 保存位置，例如 `output`。
+4. 在字体列表中选择一个中文字体，例如 `微软雅黑 / Microsoft YaHei` 或 `宋体 / SimSun`。
+5. 选择模板、纸张大小、字号和栏数密度。
+6. 点击 `生成 PDF`。
+
+软件会自动在输出文件夹里生成 PDF。例如 `examples\sample.txt` 会生成 `output\sample-AncientBook.pdf`。如果同名文件已经存在，会自动使用安全文件名，例如 `output\sample-AncientBook-2.pdf`。
+
+更详细的验收说明见 `docs/release-checklists/non-programmer-acceptance.md`。
+
+## 开发者首次运行
+
+安装开发依赖：
 
 ```powershell
 python -m pip install -e ".[dev]"
 ```
 
-Generate a sample PDF:
+生成一个示例 PDF：
 
 ```powershell
 ancientbook examples/sample.txt --output output/sample.pdf --overwrite
 ```
 
-Generate an A5 sample with a different layout preset:
+生成 A5 示例：
 
 ```powershell
 ancientbook examples/sample.txt --output output/sample-a5.pdf --paper-size a5 --font-size large --columns fewer --template aged --overwrite
 ```
 
-Use `--font C:\Path\To\YourFont.ttf` in the CLI when you want a specific local font file. The desktop app can use common installed Windows Chinese fonts directly.
+如果命令行需要指定字体，可以使用：
 
-Supported document inputs:
+```powershell
+ancientbook examples/sample.txt --output output/sample.pdf --font C:\Path\To\YourFont.ttf --overwrite
+```
 
-- `.txt`, `.text`
-- `.md`, `.markdown`
-- `.docx`
-- `.pdf` files with selectable text
-- `.rtf`
-- `.html`, `.htm`
-- `.odt`
+## 桌面版开发运行
 
-Legacy `.doc` files are detected, but AncientBook asks you to save them as `.docx` first. Scanned PDF files need OCR and are not converted automatically in this version.
-
-## Implemented Core Slice
-
-The first core slice can:
-
-- Read common document files and extract plain text locally.
-- Parse `【comment】`, `%`, `$`, and `@`.
-- Lay out text vertically from right to left.
-- Draw ancient-book-style backgrounds with paper grain, ruled frames, and aged-paper details.
-- Generate a PDF locally.
-
-The desktop interface, user settings, richer page templates, and Windows folder packaging are implemented.
-The desktop window uses a book-desk layout: controls on the left, an ancient-page preview on the right, and status feedback at the bottom.
-
-## Desktop Development Run
-
-Start the desktop UI:
+启动桌面界面：
 
 ```powershell
 ancientbook-desktop
 ```
 
-The desktop UI uses the same local PDF pipeline as the CLI. User text stays on the local machine.
+桌面界面和命令行使用同一套本地 PDF 生成流程。
 
-## Implemented Desktop Slice
+## 构建 Windows 桌面版
 
-The first desktop slice can:
-
-- Select document files.
-- Select an output folder.
-- Choose a common installed Windows Chinese font, or select a local font file manually.
-- Choose a template, paper size, font size, and column density.
-- Preview the selected ancient-page style before generating.
-- Generate a PDF through the tested local core pipeline.
-- Show success and error messages in the app.
-
-Windows folder packaging is implemented with PyInstaller.
-
-The Windows app icon is stored at `assets\icon\AncientBook.ico`, with the editable PNG source at `assets\icon\AncientBook-icon.png`.
-
-## Font And License Notes
-
-AncientBook does not bundle commercial or unknown-license fonts. The desktop app uses installed system fonts when available, and still lets you choose a local font file that you have the right to use.
-
-Third-party dependency notes are in `docs/licenses/THIRD_PARTY_NOTICES.md`.
-
-## License
-
-AncientBook is released under the MIT License. See `LICENSE`.
-
-Third-party libraries keep their own licenses. Before redistributing a packaged build, review `docs/licenses/THIRD_PARTY_NOTICES.md` and the license files included with the packaged dependencies.
-
-## Build Windows Desktop App
-
-Build the desktop app:
+构建桌面程序：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/build_windows.ps1
 ```
 
-After a successful build, open:
+构建完成后打开：
 
 ```text
 dist\AncientBook\AncientBook.exe
 ```
 
-The generated `dist/` folder is a build artifact and is not committed to git.
+`dist/` 是构建产物，不提交到 git。
 
-## Package Windows Release Zip
+Windows 图标位于 `assets\icon\AncientBook.ico`，PNG 源图位于 `assets\icon\AncientBook-icon.png`。
 
-Create a user-facing Windows zip package:
+## 打包 Windows 发布包
+
+生成给普通用户下载的 zip：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/package_windows_release.ps1
 ```
 
-If `dist\AncientBook\AncientBook.exe` already exists and you only want to create the zip again:
+如果 `dist\AncientBook\AncientBook.exe` 已经存在，只想重新生成 zip：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/package_windows_release.ps1 -SkipBuild
 ```
 
-The zip is created at:
+发布包输出位置：
 
 ```text
 release\AncientBook-Windows.zip
 ```
 
-The release zip contains `AncientBook.exe`, its runtime files, a quick-start `README-FIRST.txt`, the MIT `LICENSE`, the sample file, and third-party license notes.
+zip 中包含 `AncientBook.exe`、运行时文件、快速说明 `README-FIRST.txt`、MIT `LICENSE`、中文项目说明 `README-project.md`、英文说明 `README.en.md`、示例文件和第三方依赖许可说明。
 
-## Non-Programmer Workflow
+## 快速验收
 
-After receiving `release\AncientBook-Windows.zip`, unzip it and open the `AncientBook-Windows` folder. Then:
-
-1. Open `AncientBook.exe`.
-2. Click `选择` beside `文档` and choose one or more documents. For a first check, use `examples\sample.txt`.
-3. Click `选择` beside `输出文件夹` and choose an output folder, for example `output`.
-4. Choose a font from the Font list, such as `微软雅黑 / Microsoft YaHei` or `宋体 / SimSun`. Use `手动选择字体文件 / Custom font file` only when you want to browse for your own `.ttf` or `.otf` file.
-5. Choose a template, paper size, font size, and column density. The preview updates as these choices change.
-6. If no usable system or custom font is found, confirm the warning dialog before continuing.
-7. Click `生成 PDF`.
-
-The desktop app creates the PDF automatically in the chosen folder. For example, `examples\sample.txt` becomes `output\sample-AncientBook.pdf`. If that file already exists, the app uses the next safe name, such as `output\sample-AncientBook-2.pdf`.
-
-Supported input formats are `.txt`, `.md`, `.docx`, selectable-text `.pdf`, `.rtf`, `.html`, and `.odt`. Old `.doc` files should be saved as `.docx` first.
-
-Template choices are `素雅书页`, `朱栏格页`, and `旧藏纸页`.
-
-The app works locally and does not upload your text.
-
-For a more explicit first-run checklist, see `docs/release-checklists/non-programmer-acceptance.md`.
-
-## Quick Acceptance Check
-
-Use this check after a Windows build:
+Windows 构建后可以运行：
 
 ```powershell
 Test-Path dist\AncientBook\AncientBook.exe
 python -m ancientbook.cli examples\sample.txt --output output\sample-acceptance.pdf --overwrite
 ```
 
-Then open `output\sample-acceptance.pdf` and confirm the text is vertical with an ancient-book-style page background, including paper texture and framed page styling.
+然后打开 `output\sample-acceptance.pdf`，确认文字为竖排，并带有古籍风格页面背景、纸张纹理和边框样式。
+
+## 字体与许可证
+
+AncientBook 不内置商业或来源不明的字体。桌面版优先使用系统已安装字体，也允许用户选择自己有权使用的本地字体文件。
+
+第三方依赖说明见 `docs/licenses/THIRD_PARTY_NOTICES.md`。
+
+AncientBook 项目源码使用 MIT License。许可正文见 `LICENSE`。

@@ -4,7 +4,7 @@ Use this checklist after building `dist\AncientBook\AncientBook.exe`.
 
 - [ ] Run `powershell -ExecutionPolicy Bypass -File scripts/package_windows_release.ps1 -SkipBuild`.
 - [ ] Confirm `release\AncientBook-Windows.zip` is created.
-- [ ] Unzip it and confirm `README-FIRST.txt`, `LICENSE`, `examples\sample.txt`, and `licenses\THIRD_PARTY_NOTICES.md` are included.
+- [ ] Unzip it and confirm `README-FIRST.txt`, `README-project.md`, `README.en.md`, `LICENSE`, `examples\sample.txt`, and `licenses\THIRD_PARTY_NOTICES.md` are included.
 - [ ] Launch `dist\AncientBook\AncientBook.exe`.
 - [ ] Confirm the executable uses the AncientBook icon.
 - [ ] Confirm the window uses a left settings panel, right page preview, and bottom status area.

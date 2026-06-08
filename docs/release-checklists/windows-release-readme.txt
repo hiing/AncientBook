@@ -23,5 +23,6 @@ AncientBook 在本机处理文档，不上传你的文字。
 字体来自 Windows 已安装字体，或来自你自己选择且有权使用的本地字体文件。
 
 更多项目说明请看 README-project.md。
+英文项目说明请看 README.en.md。
 AncientBook 项目本身使用 MIT License，许可正文请看 LICENSE。
 第三方依赖许可说明请看 licenses\THIRD_PARTY_NOTICES.md。

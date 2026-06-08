@@ -86,6 +86,7 @@ def test_windows_release_package_script_creates_user_facing_zip():
         "AncientBook-Windows",
         "AncientBook-Windows.zip",
         "README-FIRST.txt",
+        "README.en.md",
         "LICENSE",
         "THIRD_PARTY_NOTICES.md",
         "examples",
