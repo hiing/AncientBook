@@ -85,6 +85,9 @@ def test_windows_release_package_script_creates_user_facing_zip():
         "-SkipBuild",
         "AncientBook-Windows",
         "AncientBook-Windows.zip",
+        "AncientBook-Windows.zip.sha256",
+        "Get-FileHash",
+        "-Algorithm SHA256",
         "README-FIRST.txt",
         "README.en.md",
         "LICENSE",
@@ -98,3 +101,5 @@ def test_windows_release_package_script_creates_user_facing_zip():
     readme = Path("README.md").read_text(encoding="utf-8")
     assert "scripts/package_windows_release.ps1" in readme
     assert "release\\AncientBook-Windows.zip" in readme
+    assert "release\\AncientBook-Windows.zip.sha256" in readme
+    assert "Get-FileHash" in readme

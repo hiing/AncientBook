@@ -14,6 +14,7 @@ $ReleaseRoot = Join-Path $ProjectRoot "release"
 $PackageName = "AncientBook-Windows"
 $PackageDir = Join-Path $ReleaseRoot $PackageName
 $ZipPath = Join-Path $ReleaseRoot "AncientBook-Windows.zip"
+$ChecksumPath = Join-Path $ReleaseRoot "AncientBook-Windows.zip.sha256"
 $ReleaseReadme = Join-Path $ProjectRoot "docs\release-checklists\windows-release-readme.txt"
 
 if (-not $SkipBuild) {
@@ -57,9 +58,17 @@ Set-Content -Path (Join-Path $PackageDir "VERSION.txt") -Value $VersionText -Enc
 if (Test-Path $ZipPath) {
     Remove-Item -Force $ZipPath
 }
+if (Test-Path $ChecksumPath) {
+    Remove-Item -Force $ChecksumPath
+}
 
 Write-Host "Creating release zip..."
 Compress-Archive -Path $PackageDir -DestinationPath $ZipPath -Force
 
+$ZipHash = Get-FileHash -Algorithm SHA256 -Path $ZipPath
+$ChecksumText = "$($ZipHash.Hash.ToLowerInvariant())  AncientBook-Windows.zip"
+Set-Content -Path $ChecksumPath -Value $ChecksumText -Encoding ascii
+
 Write-Host "Release package complete:"
 Write-Host $ZipPath
+Write-Host $ChecksumPath

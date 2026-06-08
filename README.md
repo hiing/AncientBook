@@ -134,9 +134,19 @@ powershell -ExecutionPolicy Bypass -File scripts/package_windows_release.ps1 -Sk
 
 ```text
 release\AncientBook-Windows.zip
+release\AncientBook-Windows.zip.sha256
 ```
 
 zip 中包含 `AncientBook.exe`、运行时文件、快速说明 `README-FIRST.txt`、MIT `LICENSE`、中文项目说明 `README-project.md`、英文说明 `README.en.md`、示例文件和第三方依赖许可说明。
+
+可以用 SHA-256 校验下载文件是否完整：
+
+```powershell
+Get-FileHash .\AncientBook-Windows.zip -Algorithm SHA256
+Get-Content .\AncientBook-Windows.zip.sha256
+```
+
+两个结果里的 64 位哈希值一致，说明 zip 文件与发布时的文件一致。
 
 ## 快速验收
 

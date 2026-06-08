@@ -3,8 +3,18 @@ AncientBook v0.1.0 是第一个公开 Windows 桌面版发布包。
 下载方式：
 
 1. 下载 `AncientBook-Windows.zip`
-2. 解压压缩包
-3. 双击 `AncientBook.exe`
+2. 可选下载 `AncientBook-Windows.zip.sha256`，用 SHA-256 校验 zip 是否完整
+3. 解压压缩包
+4. 双击 `AncientBook.exe`
+
+Windows PowerShell 校验方式：
+
+```powershell
+Get-FileHash .\AncientBook-Windows.zip -Algorithm SHA256
+Get-Content .\AncientBook-Windows.zip.sha256
+```
+
+两个结果里的 64 位哈希值一致，说明 zip 文件与发布时的文件一致。
 
 本版能力：
 

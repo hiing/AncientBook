@@ -11,6 +11,12 @@ AncientBook Windows 快速使用说明
 例如 sample.txt 会生成 sample-AncientBook.pdf。
 如果同名文件已经存在，会自动生成 sample-AncientBook-2.pdf 这类安全文件名。
 
+可选安全校验：
+如果你同时下载了 AncientBook-Windows.zip.sha256，可以在 PowerShell 中运行：
+Get-FileHash .\AncientBook-Windows.zip -Algorithm SHA256
+Get-Content .\AncientBook-Windows.zip.sha256
+两个结果里的 64 位哈希值一致，说明 zip 文件与发布时的文件一致。
+
 支持的输入格式：
 .txt, .text, .md, .markdown, .docx, 可复制文字的 .pdf, .rtf, .html, .htm, .odt
 

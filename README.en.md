@@ -131,9 +131,19 @@ The zip is created at:
 
 ```text
 release\AncientBook-Windows.zip
+release\AncientBook-Windows.zip.sha256
 ```
 
 The release zip contains `AncientBook.exe`, its runtime files, a quick-start `README-FIRST.txt`, the MIT `LICENSE`, `README-project.md`, `README.en.md`, the sample file, and third-party license notes.
+
+You can verify the downloaded package with SHA-256:
+
+```powershell
+Get-FileHash .\AncientBook-Windows.zip -Algorithm SHA256
+Get-Content .\AncientBook-Windows.zip.sha256
+```
+
+If the 64-character hash values match, the zip file matches the published file.
 
 ## Non-Programmer Workflow
 
