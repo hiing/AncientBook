@@ -8,7 +8,7 @@ AncientBook 是一个干净重构的 Python 桌面工具，用来把常见文档
 
 当前状态：核心 PDF 生成流程、桌面界面、Windows 打包脚本和 GitHub Release 发布包都已经完成。
 
-![AncientBook 桌面界面](docs/images/ancientbook-ui-shadow.png)
+![AncientBook 产品封面](docs/images/ancientbook-cover.png)
 
 ## 亮点特性
 
@@ -43,12 +43,20 @@ AncientBook 是一个干净重构的 Python 桌面工具，用来把常见文档
 
 ## 软件能做什么
 
+![AncientBook 桌面界面](docs/images/ancientbook-ui-shadow.png)
+
 - 选择一个或多个文档。
 - 选择 PDF 输出文件夹。
 - 从系统已安装中文字体中选择字体，也可以手动选择自己的 `.ttf` 或 `.otf` 字体文件。
 - 选择古籍页面模板、纸张大小、字号和栏数密度。
 - 在右侧预览古籍页面风格。
 - 生成本地 PDF，不上传用户文字。
+
+## 输出效果
+
+![AncientBook 古籍竖排输出预览](docs/images/ancientbook-output-preview.png)
+
+输出 PDF 会按中文古籍阅读习惯从右向左竖排，页面保留边框、栏线和纸张纹理。当前版本重点保证正文区域、边框线和栏线之间有足够间距，适合文章、摘抄、读书笔记和短篇材料的风格化排版。
 
 内置页面模板：
 

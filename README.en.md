@@ -6,7 +6,7 @@ AncientBook is a clean-room Python desktop-tool project for generating Chinese a
 
 Current status: core PDF pipeline, desktop UI, and Windows folder packaging are implemented.
 
-![AncientBook desktop UI](docs/images/ancientbook-ui-shadow.png)
+![AncientBook cover](docs/images/ancientbook-cover.png)
 
 ## Highlights
 
@@ -91,6 +91,8 @@ The desktop UI uses the same local PDF pipeline as the CLI. User text stays on t
 
 The desktop app can:
 
+![AncientBook desktop UI](docs/images/ancientbook-ui-shadow.png)
+
 - Select document files.
 - Select an output folder.
 - Choose a common installed Windows Chinese font, or select a local font file manually.
@@ -98,6 +100,12 @@ The desktop app can:
 - Preview the selected ancient-page style before generating.
 - Generate a PDF through the tested local core pipeline.
 - Show success and error messages in the app.
+
+## Output Preview
+
+![AncientBook vertical PDF output preview](docs/images/ancientbook-output-preview.png)
+
+Generated PDFs use right-to-left vertical Chinese layout with page frames, column lines, and paper texture. The current version keeps body text, frames, and ruled lines separated for readable ancient-book-style output.
 
 Windows folder packaging is implemented with PyInstaller.
 
