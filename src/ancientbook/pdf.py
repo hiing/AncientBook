@@ -10,6 +10,7 @@ from reportlab.pdfgen import canvas
 
 from ancientbook.model import GlyphPlacement, LayoutSettings
 from ancientbook.presets import DEFAULT_TEMPLATE
+from ancientbook.system_fonts import available_font_choices
 from ancientbook.template import create_background
 
 
@@ -17,7 +18,16 @@ class PdfGenerationError(RuntimeError):
     pass
 
 
+def default_font_path() -> Path | None:
+    for choice in available_font_choices():
+        if choice.path is not None:
+            return choice.path
+    return None
+
+
 def _register_font(font_path: Path | None) -> str:
+    if font_path is None:
+        font_path = default_font_path()
     if font_path is None:
         return "Helvetica"
     path = Path(font_path)
@@ -35,6 +45,11 @@ def _background_reader(settings: LayoutSettings, template_key: str) -> ImageRead
     image.save(buffer, format="PNG")
     buffer.seek(0)
     return ImageReader(buffer)
+
+
+def _draw_placement(pdf, placement: GlyphPlacement, font_name: str) -> None:
+    pdf.setFont(font_name, placement.font_size)
+    pdf.drawCentredString(placement.x, placement.y, placement.text)
 
 
 def write_pdf(
@@ -64,7 +79,6 @@ def write_pdf(
         for placement in placements:
             if placement.page_index != page_index:
                 continue
-            pdf.setFont(font_name, placement.font_size)
-            pdf.drawString(placement.x, placement.y, placement.text)
+            _draw_placement(pdf, placement, font_name)
         pdf.showPage()
     pdf.save()

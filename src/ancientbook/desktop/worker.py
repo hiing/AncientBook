@@ -21,6 +21,6 @@ class GenerateWorker(QObject):
             self.failed.emit(str(exc))
             return
         except Exception:
-            self.failed.emit("生成失败，请换一个输出位置或检查文本文件后再试。")
+            self.failed.emit("生成失败，请换一个输出位置或检查文档文件后再试。")
             return
         self.finished.emit(result)

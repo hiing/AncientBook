@@ -4,11 +4,13 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
+from ancientbook.desktop.ui_fonts import apply_interface_font
 from ancientbook.desktop.main_window import MainWindow
 
 
 def main(argv: list[str] | None = None) -> int:
     app = QApplication(argv or sys.argv)
+    apply_interface_font(app)
     window = MainWindow()
     window.show()
     return app.exec()

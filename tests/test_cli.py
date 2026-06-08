@@ -2,7 +2,15 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-from ancientbook.cli import main
+from ancientbook.cli import build_parser, main
+
+
+def test_cli_help_describes_document_inputs():
+    help_text = build_parser().format_help()
+
+    assert "documents to render" in help_text
+    for extension in [".txt", ".md", ".docx", ".pdf", ".rtf", ".html", ".odt"]:
+        assert extension in help_text
 
 
 def test_cli_generates_pdf(tmp_path: Path):

@@ -33,6 +33,7 @@ def test_save_and_load_settings_with_usability_choices(tmp_path: Path):
         last_text_dir=str(tmp_path / "texts"),
         last_output_dir=str(tmp_path / "out"),
         last_font_path=str(tmp_path / "font.ttf"),
+        font_choice_key="simkai",
         template_key="aged",
         paper_size="a5",
         font_size="large",

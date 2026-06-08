@@ -13,7 +13,11 @@ def _choice_keys(choices):
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Generate an ancient-book-style vertical PDF.")
-    parser.add_argument("text_files", nargs="+", help="UTF-8 .txt files to render")
+    parser.add_argument(
+        "document_files",
+        nargs="+",
+        help="documents to render (.txt, .md, .docx, .pdf, .rtf, .html, .odt; .doc must be saved as .docx first)",
+    )
     parser.add_argument("--output", required=True, help="Output PDF path")
     parser.add_argument("--font", default=None, help="Optional local .ttf or .otf font path")
     parser.add_argument("--title", default="AncientBook", help="PDF title")
@@ -32,7 +36,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         generate_pdf_from_request(
             GenerateRequest(
-                text_files=[Path(path) for path in args.text_files],
+                text_files=[Path(path) for path in args.document_files],
                 output_path=Path(args.output),
                 font_path=Path(args.font) if args.font else None,
                 title=args.title,

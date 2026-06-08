@@ -2,6 +2,9 @@
 
 AncientBook is a clean-room Python implementation. It does not copy vRain source code.
 
+AncientBook's own source code is released under the MIT License. Third-party
+libraries, packaging tools, and user-selected fonts keep their own licenses.
+
 Packaged runtime dependencies may include:
 
 - PySide6: Qt for Python bindings. Review Qt for Python licensing before public redistribution.

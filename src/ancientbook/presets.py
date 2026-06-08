@@ -13,23 +13,23 @@ class Choice:
 
 
 TEMPLATE_CHOICES = (
-    Choice("simple", "Simple paper"),
-    Choice("classic", "Classic frame"),
-    Choice("aged", "Light aged paper"),
+    Choice("simple", "素雅书页"),
+    Choice("classic", "朱栏格页"),
+    Choice("aged", "旧藏纸页"),
 )
 PAPER_SIZE_CHOICES = (
     Choice("a4", "A4"),
     Choice("a5", "A5"),
 )
 FONT_SIZE_CHOICES = (
-    Choice("small", "Small"),
-    Choice("medium", "Medium"),
-    Choice("large", "Large"),
+    Choice("small", "小字"),
+    Choice("medium", "中字"),
+    Choice("large", "大字"),
 )
 COLUMN_DENSITY_CHOICES = (
-    Choice("fewer", "Fewer"),
-    Choice("standard", "Standard"),
-    Choice("more", "More"),
+    Choice("fewer", "疏朗"),
+    Choice("standard", "标准"),
+    Choice("more", "紧凑"),
 )
 
 DEFAULT_TEMPLATE = "simple"
@@ -80,9 +80,13 @@ def build_layout_settings(
 
     page_width, page_height = _PAGE_SIZES[paper_key]
     body_size, comment_size = _FONT_SIZES[font_key]
-    column_count = _COLUMNS[columns_key]
 
     default = LayoutSettings()
+    content_width = page_width - default.margin * 2
+    requested_columns = _COLUMNS[columns_key]
+    min_column_width = body_size + 8
+    column_count = min(requested_columns, max(1, content_width // min_column_width))
+
     row_count = default.rows
     if paper_key != DEFAULT_PAPER_SIZE or font_key != DEFAULT_FONT_SIZE:
         content_height = page_height - default.margin * 2

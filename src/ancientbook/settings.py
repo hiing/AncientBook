@@ -22,6 +22,7 @@ class AppSettings:
     last_text_dir: str = ""
     last_output_dir: str = ""
     last_font_path: str = ""
+    font_choice_key: str = ""
     template_key: str = DEFAULT_TEMPLATE
     paper_size: str = DEFAULT_PAPER_SIZE
     font_size: str = DEFAULT_FONT_SIZE
@@ -46,6 +47,7 @@ def load_settings(path: Path | None = None) -> AppSettings:
         last_text_dir=str(raw.get("last_text_dir", "")),
         last_output_dir=str(raw.get("last_output_dir", "")),
         last_font_path=str(raw.get("last_font_path", "")),
+        font_choice_key=str(raw.get("font_choice_key", "")),
         template_key=normalize_choice(raw.get("template_key"), TEMPLATE_CHOICES, DEFAULT_TEMPLATE),
         paper_size=normalize_choice(raw.get("paper_size"), PAPER_SIZE_CHOICES, DEFAULT_PAPER_SIZE),
         font_size=normalize_choice(raw.get("font_size"), FONT_SIZE_CHOICES, DEFAULT_FONT_SIZE),
